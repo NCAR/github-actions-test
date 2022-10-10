@@ -20,3 +20,11 @@ jobs:
         run: sudo apt install libnetcdff-dev
       - name: Installing libopenmpi-dev
         run: sudo apt install libopenmpi-dev
+      - name: Installing gfortran
+        run: sudo apt install gfortran
+      - name: Creating build template
+        run: cd ~/build_templates
+        run: pwd
+        run: ls -l
+        run: cp mkmf.template.gfortran mkmf.template
+        run: ls -l
