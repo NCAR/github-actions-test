@@ -2,7 +2,7 @@ name: github action pull request demo
 run-name: ${{ github.actor }} testing pull request action
 on:
   pull_request:
-    [opened, reopened]
+    types: [opened, reopened]
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
