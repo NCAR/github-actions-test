@@ -30,6 +30,7 @@ jobs:
           ls -l
           cp mkmf.template.gfortran mkmf.template
           ls -l
+          echo "NETCDF=/usr/" >> mkmf.template
       - name: Building lorenz_96 model
         run: |
           pwd
