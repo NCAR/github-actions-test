@@ -30,3 +30,8 @@ jobs:
           ls -l
           cp mkmf.template.gfortran mkmf.template
           ls -l
+      - name: Building lorenz_96 model
+        run: |
+          pwd
+          cd models/lorenz_96/work
+          ./quickbuild.sh
