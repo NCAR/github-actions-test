@@ -23,8 +23,9 @@ jobs:
       - name: Installing gfortran
         run: sudo apt install gfortran
       - name: Creating build template
-        run: cd ~/build_templates
-        run: pwd
-        run: ls -l
-        run: cp mkmf.template.gfortran mkmf.template
-        run: ls -l
+        run: |
+          cd ~/build_templates
+          pwd
+          ls -l
+          cp mkmf.template.gfortran mkmf.template
+          ls -l
