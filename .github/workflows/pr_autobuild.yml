@@ -25,7 +25,7 @@ jobs:
       - name: Creating build template
         run: |
           ls -l
-          cd ~/build_templates
+          cd build_templates
           pwd
           ls -l
           cp mkmf.template.gfortran mkmf.template
