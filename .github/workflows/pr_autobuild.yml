@@ -34,6 +34,7 @@ jobs:
           ls -l
           echo "NETCDF=/usr/" >> mkmf.template
           ls /usr/
+          ls /usr/bin/
       - name: Building lorenz_96 model
         run: |
           pwd
