@@ -20,6 +20,8 @@ jobs:
         run: sudo apt-get install libnetcdf-dev
       - name: Installing libnetcdff-dev
         run: sudo apt-get install libnetcdff-dev
+      - name: Installing netcdf-bin
+        run: sudo apt-get install netcdf-bin
       - name: Installing libopenmpi-dev
         run: sudo apt-get install libopenmpi-dev
       - name: Installing gfortran
