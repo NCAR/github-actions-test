@@ -37,4 +37,6 @@ jobs:
       - name: Building lorenz_96 model
         run: |
           pwd
-          ./models/lorenz_96/work/quickbuild.sh
+          cd models/lorenz_96/work/
+          ls -l
+          ./quickbuild.sh
