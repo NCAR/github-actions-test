@@ -1876,8 +1876,6 @@ hor_dist = 1.0e9_r8
 ! Initialize variables to missing status
 
 num_close = 0
-close_ind = -99
-if (present(dist)) dist = 1.0e9_r8   !something big and positive (far away) in radians
 istatus1  = 0
 istatus2  = 0
 
@@ -1991,8 +1989,6 @@ hor_dist = 1.0e9_r8
 ! Initialize variables to missing status
 
 num_close = 0
-close_ind = -99
-if (present(dist)) dist = 1.0e9_r8   !something big and positive (far away) in radians
 istatus1  = 0
 istatus2  = 0
 
@@ -3056,6 +3052,7 @@ type(time_type),     intent(in) :: dart_time
 
 integer :: year, month, day, hour, minute, second
 character(len=64) :: timestring
+timestring = ''
 character(len=*), parameter :: routine = 'write_model_time_restart'
 
 call get_date(dart_time, year, month, day, hour, minute, second)
@@ -3082,7 +3079,7 @@ call nc_end_define_mode(ncid)
 
 endif
 
-call nc_put_variable(ncid, 'xtime', timestring, routine)
+call nc_put_variable(ncid, 'xtime', trim(timestring), routine)
 
 end subroutine write_model_time_restart
 
