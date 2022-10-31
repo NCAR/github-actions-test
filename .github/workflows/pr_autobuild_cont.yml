@@ -1,0 +1,30 @@
+name: Build DART from container
+run-name: ${{ github.actor }} building & compiling from pull request
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  Build-Compile-DART-Container:
+    runs-on: ubuntu-latest
+    container: 
+      image: achaup/dart_dep:root
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - run: |
+          pwd
+          whoami
+      - name: Creating build template
+        run: |
+          cd build_templates
+          pwd
+          cp mkmf.template.gfortran mkmf.template
+          echo "NETCDF=/usr/" >> mkmf.template
+      - name: Building lorenz_96 model
+        run: |
+          pwd
+          cd models/lorenz_96/work/
+          ls -l
+          ./quickbuild.sh
+      - name: Run lorenz_96 with MPI
+        run: mpirun -n 4 --allow-run-as-root ./filter
