@@ -9,20 +9,20 @@ jobs:
     container: 
       image: achaup/dart_dep:latest
     steps:
-      name: Checkout repo
-      uses: actions/checkout@v3
-    - run: pwd
-    - name: Creating build template
-      run: |
-        cd build_templates
-        pwd
-        cp mkmf.template.gfortran mkmf.template
-        echo "NETCDF=/usr/" >> mkmf.template
-    - name: Building lorenz_96 model
-      run: |
-        pwd
-        cd models/lorenz_96/work/
-        ls -l
-        ./quickbuild.sh
-    - name: Run lorenz_96 with MPI
-      run: mpirun -n 4 ./filter
+      - name: Checkout repo
+        uses: actions/checkout@v3
+      - run: pwd
+      - name: Creating build template
+        run: |
+          cd build_templates
+          pwd
+          cp mkmf.template.gfortran mkmf.template
+          echo "NETCDF=/usr/" >> mkmf.template
+      - name: Building lorenz_96 model
+        run: |
+          pwd
+          cd models/lorenz_96/work/
+          ls -l
+          ./quickbuild.sh
+      - name: Run lorenz_96 with MPI
+        run: mpirun -n 4 ./filter
