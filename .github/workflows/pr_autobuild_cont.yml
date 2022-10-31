@@ -11,8 +11,7 @@ jobs:
     steps:
       name: Checkout repo
       uses: actions/checkout@v3
-    - run: |
-        pwd
+    - run: pwd
     - name: Creating build template
       run: |
         cd build_templates
@@ -27,4 +26,3 @@ jobs:
         ./quickbuild.sh
     - name: Run lorenz_96 with MPI
       run: mpirun -n 4 ./filter
-    
