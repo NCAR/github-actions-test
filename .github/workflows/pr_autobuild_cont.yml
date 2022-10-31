@@ -7,11 +7,13 @@ jobs:
   Build-Compile-DART-Container:
     runs-on: ubuntu-latest
     container: 
-      image: achaup/dart_dep:latest
+      image: achaup/dart_dep:root
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - run: pwd
+      - run: |
+          pwd
+          whoami
       - name: Creating build template
         run: |
           cd build_templates
