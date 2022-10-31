@@ -1,0 +1,16 @@
+name: Automatically Build & Compile from Pull Request
+run-name: ${{ github.actor }} building & compiling from pull request
+on:
+  pull_request:
+    types: [opened, reopened]
+jobs:
+  Build-Compile-DART-Container:
+    runs-on: ubuntu-latest
+    container: 
+      image: achaup/dart_dep:latest
+    steps:
+      name: Checkout repo
+      uses: actions/checkout@v3
+      run: ls -l 
+
+    
