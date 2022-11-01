@@ -27,4 +27,4 @@ jobs:
           ls -l
           ./quickbuild.sh
       - name: Run lorenz_96 with MPI
-        run: mpirun -n 4 ./filter
+        run: mpirun -n 4 --allow-run-as-root ./filter
