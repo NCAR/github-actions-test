@@ -11,9 +11,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-      - run: |
+      - name: Debug and verify container libraries
+        run: |
+          mpirun --version
           pwd
-          whoami
+          ls -l
+          cat /etc/os-release
       - name: Creating build template
         run: |
           cd build_templates
@@ -27,6 +30,7 @@ jobs:
           ls -l
           ./quickbuild.sh
       - name: Run loren_96 without MPI
+        run: |
           cd models/lorenz_96/work/
           ls -l
           ./filter
