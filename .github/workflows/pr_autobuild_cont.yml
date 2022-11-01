@@ -17,6 +17,7 @@ jobs:
           pwd
           ls -l
           cat /etc/os-release
+          git config --global --add safe.directory /__w/github-actions-test/github-actions-test
       - name: Creating build template
         run: |
           cd build_templates
