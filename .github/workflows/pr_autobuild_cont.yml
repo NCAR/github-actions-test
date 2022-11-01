@@ -27,6 +27,7 @@ jobs:
           ls -l
           ./quickbuild.sh
       - name: Run loren_96 without MPI
+        run: |
           cd models/lorenz_96/work/
           ls -l
           ./filter
