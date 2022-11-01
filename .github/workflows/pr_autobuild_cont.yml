@@ -11,10 +11,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+      - name: Debug and verify container libraries
       - run: |
+          mpirun --version
           pwd
           ls -l
-          whoami
+          cat /etc/os-release
       - name: Creating build template
         run: |
           cd build_templates
