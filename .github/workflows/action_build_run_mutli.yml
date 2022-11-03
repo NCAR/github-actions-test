@@ -34,7 +34,7 @@ jobs:
         run: |
           cd models/lorenz_96/work/
           mpirun -n 2 --allow-run-as-root ./filter
-  build-run-lorenz_84:
+  build-run-lorenz_63:
     runs-on: ubuntu-latest
     container: 
       image: achaup/dart_dep:root
@@ -51,10 +51,10 @@ jobs:
           echo "NETCDF = /usr/" >> mkmf.template
       - name: Building lorenz_84 model
         run: |
-          cd models/lorenz_84/work/
+          cd models/lorenz_63/work/
           ./quickbuild.sh
-      - name: Running lorenz_84 with MPI
+      - name: Running lorenz_63 with MPI
         run: |
-          cd models/lorenz_84/work/
+          cd models/lorenz_63/work/
           mpirun -n 2 --allow-run-as-root ./filter
   
