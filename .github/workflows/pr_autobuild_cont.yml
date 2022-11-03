@@ -4,35 +4,32 @@ on:
   pull_request:
     types: [opened, reopened]
 jobs:
-  Build-Compile-DART-Container:
-    runs-on: ubuntu-20.04-16core
+  build-run-lorenz_96:
+    # Runner instance OS
+    runs-on: ubuntu-latest
     container: 
+      # Pull Docker image from Dockerhub
       image: achaup/dart_dep:root
+      # Docker run argument added to solve MPI issues in containers
       options: "--cap-add=SYS_PTRACE"
     steps:
+      # For each new set of steps, workdir is changed to
+      # the root directory of checked out repo (in this case: ~/github-actions-test/github-actions-test)
       - name: Checkout repo
         uses: actions/checkout@v3
-      - name: Debug and verify container libraries
-        run: |
-          mpirun --version
-          pwd
-          ls -l
-          cat /etc/os-release
-          git config --global --add safe.directory /__w/github-actions-test/github-actions-test
+        # Declare safe directory to avoid dubious ownership of checked out repo in container
+        run: git config --global --add safe.directory /__w/github-actions-test/github-actions-test
       - name: Creating build template
         run: |
           cd build_templates
-          pwd
           cp mkmf.template.gfortran mkmf.template
-          echo "NETCDF=/usr/" >> mkmf.template
+          echo "NETCDF = /usr/" >> mkmf.template
       - name: Building lorenz_96 model
         run: |
-          pwd
           cd models/lorenz_96/work/
-          ls -l
           ./quickbuild.sh
       - name: Run lorenz_96 with MPI
         run: |
           cd models/lorenz_96/work/
-          ls -l
-          mpirun -n 4 --allow-run-as-root ./filter
+        # max n=2 as standard github runners only have 2 physical cores
+          mpirun -n 2 --allow-run-as-root ./filter
