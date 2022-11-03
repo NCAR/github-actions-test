@@ -18,7 +18,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         # Declare safe directory to avoid dubious ownership of checked out repo in container
-      - run: git config --global --add safe.directory /__w/github-actions-test/github-actions-test
+      - name: Set checked out repo as a safe git directory
+        run: git config --global --add safe.directory /__w/github-actions-test/github-actions-test
       - name: Creating mkmf build template
         run: |
           cd build_templates
