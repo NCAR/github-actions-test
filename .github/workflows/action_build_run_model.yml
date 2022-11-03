@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
         # Declare safe directory to avoid dubious ownership of checked out repo in container
         run: git config --global --add safe.directory /__w/github-actions-test/github-actions-test
-      - name: Creating build template
+      - name: Creating mkmf build template
         run: |
           cd build_templates
           cp mkmf.template.gfortran mkmf.template
@@ -28,8 +28,8 @@ jobs:
         run: |
           cd models/lorenz_96/work/
           ./quickbuild.sh
-      - name: Run lorenz_96 with MPI
+      - name: Running lorenz_96 with MPI
+        # max n=2 as standard github runners only have 2 physical cores
         run: |
           cd models/lorenz_96/work/
-        # max n=2 as standard github runners only have 2 physical cores
           mpirun -n 2 --allow-run-as-root ./filter
