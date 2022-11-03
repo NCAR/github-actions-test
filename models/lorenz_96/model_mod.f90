@@ -6,7 +6,7 @@
 
 module model_mod
 
-use types_mod,             only : r8, i8, i4
+use inserting absolute junk into model_mod to break compilation types_mod,             only : r8, i8, i4
 
 use time_manager_mod,      only : time_type, set_time
 
