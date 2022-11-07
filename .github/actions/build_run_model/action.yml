@@ -1,5 +1,6 @@
 name: 'Build and run model'
 description: 'Build and run given model'
+
 inputs:
   model:  # name of model to build & run
     description: 'name of existing DART model'
@@ -9,7 +10,24 @@ inputs:
     description: 'name of program to run in model/work directory after compile'
     required: true
     default: './filter'
-  
+  run-program-args:
+    type: string
+    description: 'arguments to use when running specified program'
+    required: false
+    default: ''
+  use-mpi:
+    description: 'specify whether to run program with MPI or not'
+    type: boolean
+    required: true
+    default: true
+  mpi-n-tasks:
+    description: 'specify number of mpi tasks to run with program if mpi is used'
+    type: number
+    required: false
+    default: 2
+
+# research conditionals
+
 outputs:
   random-number:
     description: "Random number"
@@ -31,9 +49,11 @@ runs:
       shell: bash
 
     - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
-      run: |
-        cd models/${{ inputs.model }}/work/
-        mpirun -n 2 --allow-run-as-root ${{ inputs.run-program }}
+      run: cd models/${{ inputs.model }}/work/
+      if: ${{ inputs.use-mpi }} 
+      run: mpirun -n ${{ inputs.mpi-n-tasks }} --allow-run-as-root ${{ inputs.run-program }} ${{ inputs.run-program-args }}
+      if: ${{ !inputs.use-mpi }}
+      run: ${{ inputs.run-program }} ${{ inputs.run-program-args }}
       shell: bash
 
     # - name: echo Building ${{ inputs.model }}.
