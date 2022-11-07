@@ -53,6 +53,7 @@ runs:
       run: |
         cd models/${{ inputs.model }}/work/
         mpirun -n ${{ inputs.mpi-n-tasks }} --allow-run-as-root ${{ inputs.run-program }} ${{ inputs.run-program-args }}
+      shell: bash
     - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
       if: ${{ !inputs.use-mpi }}
       run: |
