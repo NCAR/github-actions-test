@@ -5,7 +5,7 @@ inputs:
     description: 'name of existing DART model'
     required: true
     default: 'lorenz_96'
-  run_program:  # program to run after compilation
+  run-program:  # program to run after compilation
     description: 'name of program to run in model/work directory after compile'
     required: true
     default: './filter'
@@ -23,17 +23,17 @@ runs:
         cp mkmf.template.gfortran mkmf.template
         echo "NETCDF = /usr/" >> mkmf.template
       shell: bash
-      
+
     - name: Building ${{ inputs.model }} model
       run: |
         cd models/${{ inputs.model }}/work
         ./quickbuild.sh
       shell: bash
 
-    - name: Running ${{ inputs.model }} ${{ run_program }} program
+    - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
       run: |
         cd models/${{ inputs.model }}/work/
-        mpirun -n 2 --allow-run-as-root ${{ run_program }}
+        mpirun -n 2 --allow-run-as-root ${{ inputs.run-program }}
       shell: bash
 
     # - name: echo Building ${{ inputs.model }}.
