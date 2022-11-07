@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Run Composite Action
-        uses: ./github/actions/build_run_model
+        uses: ./.github/actions/build_run_model
         with: 
           model: lorenz_63
       
