@@ -5,6 +5,11 @@ inputs:
     description: 'name of existing DART model'
     required: true
     default: 'lorenz_96'
+  run_program:  # program to run after compilation
+    description: 'name of program to run in model/work directory after compile'
+    required: true
+    default: './filter'
+  
 outputs:
   random-number:
     description: "Random number"
@@ -12,16 +17,35 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo Building ${{ inputs.model }}.
+    - name: Creating Makefile template
+      run: |
+        cd build_templates
+        cp mkmf.template.gfortran mkmf.template
+        echo "NETCDF = /usr/" >> mkmf.template
       shell: bash
-    # - id: random-number-generator
-    #   run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-    #   shell: bash
-    - run: |
-        pwd
-        ls -l
-      shell: bash 
-    - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      
+    - name: Building ${{ inputs.model }} model
+      run: |
+        cd models/${{ inputs.model }}/work
+        ./quickbuild.sh
       shell: bash
-    # - run: goodbye.sh
+
+    - name: Running ${{ inputs.model }} ${{ run_program }} program
+      run: |
+        cd models/${{ inputs.model }}/work/
+        mpirun -n 2 --allow-run-as-root ${{ run_program }}
+      shell: bash
+
+    # - name: echo Building ${{ inputs.model }}.
     #   shell: bash
+    # # - id: random-number-generator
+    # #   run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+    # #   shell: bash
+    # - run: |
+    #     pwd
+    #     ls -l
+    #   shell: bash 
+    # - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+    #   shell: bash
+    # # - run: goodbye.sh
+    # #   shell: bash
