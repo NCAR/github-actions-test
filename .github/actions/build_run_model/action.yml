@@ -49,23 +49,13 @@ runs:
       shell: bash
 
     - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
-      run: cd models/${{ inputs.model }}/work/
       if: ${{ inputs.use-mpi }} 
-      run: mpirun -n ${{ inputs.mpi-n-tasks }} --allow-run-as-root ${{ inputs.run-program }} ${{ inputs.run-program-args }}
+      run: |
+        cd models/${{ inputs.model }}/work/
+        mpirun -n ${{ inputs.mpi-n-tasks }} --allow-run-as-root ${{ inputs.run-program }} ${{ inputs.run-program-args }}
+    - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
       if: ${{ !inputs.use-mpi }}
-      run: ${{ inputs.run-program }} ${{ inputs.run-program-args }}
+      run: |
+        cd models/${{ inputs.model }}/work/
+        ${{ inputs.run-program }} ${{ inputs.run-program-args }}
       shell: bash
-
-    # - name: echo Building ${{ inputs.model }}.
-    #   shell: bash
-    # # - id: random-number-generator
-    # #   run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
-    # #   shell: bash
-    # - run: |
-    #     pwd
-    #     ls -l
-    #   shell: bash 
-    # - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
-    #   shell: bash
-    # # - run: goodbye.sh
-    # #   shell: bash
