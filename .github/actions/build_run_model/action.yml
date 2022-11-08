@@ -29,19 +29,20 @@ inputs:
 runs:
   using: "composite"
   steps:
+    # Steps to create Makefile template
     - name: Creating Makefile template
       run: |
         cd build_templates
         cp mkmf.template.gfortran mkmf.template
         echo "NETCDF = /usr/" >> mkmf.template
       shell: bash
-
+    # Steps to compile and build model
     - name: Building ${{ inputs.model }} model
       run: |
         cd models/${{ inputs.model }}/work
         ./quickbuild.sh
       shell: bash
-
+    # Steps to run the specified run-program with mpi options
     - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program (use-mpi=true)
       if: ${{ inputs.use-mpi }} 
       run: |
