@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} triggered action by a pull request
 
 on:
   pull_request:
-    types: [ opened, reopened, ready_for_review ]
+    types: [ opened, reopened, ready_for_review, synchronize ]
 
 jobs:
   # Job 1
