@@ -25,13 +25,7 @@ inputs:
     type: number
     required: false
     default: 2
-
-# research conditionals
-
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-number }}
+    
 runs:
   using: "composite"
   steps:
@@ -48,13 +42,13 @@ runs:
         ./quickbuild.sh
       shell: bash
 
-    - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
+    - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program (use-mpi=true)
       if: ${{ inputs.use-mpi }} 
       run: |
         cd models/${{ inputs.model }}/work/
         mpirun -n ${{ inputs.mpi-n-tasks }} --allow-run-as-root ${{ inputs.run-program }} ${{ inputs.run-program-args }}
       shell: bash
-    - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program
+    - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program (use-mpi=false)
       if: ${{ !inputs.use-mpi }}
       run: |
         cd models/${{ inputs.model }}/work/
