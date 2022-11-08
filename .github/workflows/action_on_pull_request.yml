@@ -34,7 +34,7 @@ jobs:
       image: achaup/dart_dep:root
       options: '--cap-add=SYS_PTRACE'
     steps:
-      - name: Checkout repo
+      - name: Checkout repo - random suggestions
         uses: actions/checkout@v3
       - name: Set checked out repo as a safe git directory
         run: git config --global --add safe.directory /__w/github-actions-test/github-actions-test
