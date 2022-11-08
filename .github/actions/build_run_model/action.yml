@@ -30,7 +30,7 @@ runs:
   using: "composite"
   steps:
     # Steps to create Makefile template
-    - name: Creating Makefile template
+    - name: Creating Makefile template :)
       run: |
         cd build_templates
         cp mkmf.template.gfortran mkmf.template
