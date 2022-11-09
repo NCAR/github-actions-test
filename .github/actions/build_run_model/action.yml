@@ -47,19 +47,19 @@ runs:
     # Steps to compile and build model
     - name: Building ${{ inputs.model }} model
       run: |
-        cd ${{ input.models-directory }}/${{ inputs.model }}/work
+        cd ${{ inputs.models-directory }}/${{ inputs.model }}/work
         ./quickbuild.sh
       shell: bash
     # Steps to run the specified run-program with mpi options
     - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program (use-mpi=true)
       if: ${{ inputs.use-mpi }} 
       run: |
-        cd ${{ input.models-directory }}/${{ inputs.model }}/work/
+        cd ${{ inputs.models-directory }}/${{ inputs.model }}/work/
         mpirun -n ${{ inputs.mpi-n-tasks }} --allow-run-as-root ${{ inputs.run-program }} ${{ inputs.run-program-args }}
       shell: bash
     - name: Running ${{ inputs.model }} ${{ inputs.run-program }} program (use-mpi=false)
       if: ${{ !inputs.use-mpi }}
       run: |
-        cd ${{ input.models-directory }}/${{ inputs.model }}/work/
+        cd ${{ inputs.models-directory }}/${{ inputs.model }}/work/
         ${{ inputs.run-program }} ${{ inputs.run-program-args }}
       shell: bash
