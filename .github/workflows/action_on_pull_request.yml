@@ -20,7 +20,7 @@ jobs:
       - name: Set checked out repo as a safe git directory
         run: git config --global --add safe.directory /__w/github-actions-test/github-actions-test
       - name: Build and run lorenz_96
-        uses: ./.github/actions/build_run_model
+        uses: ./.github/actions/build_run_model 
         with: 
           model: lorenz_96
           run-program: ./filter
