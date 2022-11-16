@@ -17,8 +17,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+<<<<<<< HEAD
       - name: Set checked out repo as a safe git directory 
         run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+=======
+        with:
+          set-safe-directory: 'false'
+>>>>>>> c5da0a260715f6e3706be2cc4eb3dabd714877c8
       - name: Build and run lorenz_96
         uses: ./.github/actions/build_run_model 
         with: 
@@ -36,8 +41,13 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+<<<<<<< HEAD
       - name: Set checked out repo as a safe git directory
         run: git config --global --add safe.directory /__w/${{ github.event.repository.name }}/${{ github.event.repository.name }}
+=======
+        with:
+          set-safe-directory: 'false'
+>>>>>>> c5da0a260715f6e3706be2cc4eb3dabd714877c8
       - name: Build and run lorenz_63 with no mpi
         uses: ./.github/actions/build_run_model
         with:
