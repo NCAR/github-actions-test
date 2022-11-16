@@ -5,7 +5,21 @@ on:
   pull_request:
     types: [ opened, reopened, synchronize ]
 
-permissions: read-all
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  deployments: read
+  id-token: read
+  issues: none
+  discussions: none
+  packages: none
+  pages: none
+  pull-requests: read
+  repository-projects: read
+  security-events: read
+  statuses: read|write
+
 
 jobs:
   # Job 1
